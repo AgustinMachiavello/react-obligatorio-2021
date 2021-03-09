@@ -27,7 +27,7 @@ class App extends Component {
               />
               <Route
                 exact={true}
-                path="/register"
+                path="/registro"
                 component={Register}
               />
             </PageWrapper>

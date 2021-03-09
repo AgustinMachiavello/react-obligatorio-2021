@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import {withFormik} from 'formik';
 import *  as Yup from 'yup'
+import  { Redirect } from 'react-router-dom'
 
 // Components
 import RegisterForm from '../components/RegisterForm';
 import Field from '../components/Field';
 
 // API
-import {setToken, getToken, fetchAPI} from '../api/api';
+import {setToken, getToken, fetchAPI, getError} from '../api/api';
 
 
 
@@ -42,24 +43,12 @@ class Register extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const {nombre, password, altura} = e.target.elements
-        const data = JSON.stringify({
-            "nombre": nombre.value,
-            "password": password.value,
-            "altura": altura.value,
-        })
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: data,
+        const data = {
+            nombre: nombre.value,
+            password: password.value,
+            altura: altura.value,
         }
-        
-        fetchAPI('registro', options).then(
-            (response) => {
-                console.log('RES', response)
-            }
-        )
+        fetchAPI('registro', data, 'POST').then(response => console.log(response)) 
     }
 
     render() {

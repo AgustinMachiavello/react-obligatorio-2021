@@ -1,9 +1,26 @@
-const BASE_URL = 'http://plan-nature.000webhostapp.com/api/obligatorio/'
+import { useParams } from 'react-router';
 
-const axios = require('axios');
+const BASE_URL = 'https://plan-nature.000webhostapp.com/api/obligatorio/'
 
-export async function fetchAPI(path, options) {
-    return axios(BASE_URL + path, options)
+export const fetchAPI = (path, data, method) => {
+    const params = Object.entries(data);
+    let uri = ''
+    for(const d in params) {
+        if(d !== '0') {
+            uri += `&${params[d][0]}=1`
+        }
+        else {
+            uri += `?${params[d][0]}=1`
+        }
+    }
+    return fetch(BASE_URL + path + uri, { method: method }).then(res => res.json());
+}
+
+export const getError = (response) => {
+    if (response.status === 'ERROR') {
+        return response.msg
+    }
+    return
 }
 
 export const getToken = () => {
