@@ -1,8 +1,9 @@
-const BASE_URL = 'https://jsonplaceholder.typicode.com/'
+const BASE_URL = 'http://plan-nature.000webhostapp.com/api/obligatorio/'
 
+const axios = require('axios');
 
-export async function fetchAPI(path, data) {
-    return fetch(BASE_URL + path, data).then(res => res.json())
+export async function fetchAPI(path, options) {
+    return axios(BASE_URL + path, options)
 }
 
 export const getToken = () => {

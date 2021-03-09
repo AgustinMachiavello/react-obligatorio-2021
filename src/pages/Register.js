@@ -10,6 +10,7 @@ import Field from '../components/Field';
 import {setToken, getToken, fetchAPI} from '../api/api';
 
 
+
 const fields = {
     sections: [
         [
@@ -41,18 +42,20 @@ class Register extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const {nombre, password, altura} = e.target.elements
-        const data = {
-            method: "GET",
+        const data = JSON.stringify({
+            "nombre": nombre.value,
+            "password": password.value,
+            "altura": altura.value,
+        })
+        const options = {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                "nombre": nombre.value,
-                "password": password.value,
-                "altura": altura.value,
-            })
+            body: data,
         }
-        fetchAPI('todos/1', data).then(
+        
+        fetchAPI('registro', options).then(
             (response) => {
                 console.log('RES', response)
             }
