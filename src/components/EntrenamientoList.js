@@ -13,6 +13,7 @@ class EntrenamientoList extends Component {
   }
 
   componentDidMount() {
+    // #TODO fetch da error
     this.setState({entrenamientos: [{'id': '1'}]})
   }
 

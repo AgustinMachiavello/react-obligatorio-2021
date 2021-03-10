@@ -24,7 +24,7 @@ export const getError = (response) => {
             for(const m in response.msg){
                 errors += response.msg[m][0] + ' '
             }
-            return[errors]
+            return [errors]
         }
     }
     return

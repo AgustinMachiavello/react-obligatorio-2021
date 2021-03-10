@@ -27,7 +27,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    const user = this.props.location.state ? this.props.location.state.user: null;
+    const user = this.props.location.state ? this.props.location.state.user : null;
 
     return (
       <div>

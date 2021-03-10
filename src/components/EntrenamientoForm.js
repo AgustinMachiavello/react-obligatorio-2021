@@ -36,7 +36,7 @@ class EntrenamientoForm extends Component {
     super(props);
     this.state = {
       messages: [],
-      entrenamientoTipos: [],
+      optionsList: [],
     };
   }
 
@@ -69,7 +69,7 @@ class EntrenamientoForm extends Component {
         const errors = getError(response);
         this.props.onError(errors);
         if (!errors) {
-          this.setState({entrenamientoTipos: response.tipos })
+          this.setState({optionsList: response.tipos })
         }
       }
     )
@@ -98,7 +98,7 @@ class EntrenamientoForm extends Component {
                       onBlur={this.props.handleBlur}
                       touched={this.props.touched[field.name]}
                       errors={this.props.errors[field.name]}
-                      entrenamientoTipos={this.state.entrenamientoTipos}/>
+                      optionsList={this.state.optionsList}/>
                   );
                 })}
               </div>

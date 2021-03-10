@@ -20,7 +20,7 @@ class Field extends Component {
                     />
                     : 
                     <select className="form-control" id={this.props.name} >
-                        {this.props.entrenamientoTipos && this.props.entrenamientoTipos.map((selectItem, selectItemIndex) => {
+                        {this.props.optionsList && this.props.optionsList.map((selectItem, selectItemIndex) => {
                             return (
                                 <option key={selectItemIndex} value={selectItem.id}>{selectItem.nombre}</option>
                             )
