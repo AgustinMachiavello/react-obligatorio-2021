@@ -25,28 +25,28 @@ class Registro extends Component {
 
         return <form onSubmit={ this.e_registrarse }>
             <div className="row">
-                <div className="col-6">
+                <div className="col col-6">
                     <label htmlFor="nombre">Nombre</label><br/>
                     <input type="text" id="nombre" className="form-control" value={ this.state.nombre } onChange={ this.e_nombre } />
                 </div>
             </div>
 
             <div className="row">
-                <div className="col-6">
+                <div className="col col-6">
                     <label htmlFor="password">Password</label><br/>
                     <input type="password" id="password" className="form-control" value={ this.state.password } onChange={ this.e_password } />
                 </div>
             </div>
 
             <div className="row">
-                <div className="col-6">
+                <div className="col col-6">
                     <label htmlFor="altura">Altura (mtr)</label><br/>
                     <input type="number" id="altura" className="form-control" value={ this.state.altura } onChange={ this.e_altura } />
                 </div>
             </div>
 
             <div className="row">
-                <div className="col-6">
+                <div className="col col-6">
                     <input type="submit" className="btn btn-success" value="Registrarse" />
                 </div>
             </div>

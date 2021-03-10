@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { withFormik } from "formik";
 import * as Yup from "yup";
+import { Link } from 'react-router-dom';
 
 // Components
 import Field from "../components/Field";
 
 // API
-import { setToken, getToken, fetchAPI, getError } from "../api/api";
+import { fetchAPI, getError } from "../api/api";
 
 const fields = {
   sections: [
@@ -58,21 +59,22 @@ class Register extends Component {
         this.setState({
           messages: ["Usuario creado exitosamente. Redirigiendo..."],
         });
-        setToken(response.token);
+        // setToken(response.token);
         setTimeout(() => {
           this.props.history.push("/login");
-        }, 2000);
+        }, 500);
       }
     });
   };
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
+      <div className="">
+        <h1>Registro de usuario</h1>
+        <form onSubmit={this.handleSubmit} className="">
           {fields.sections.map((section, sectionIndex) => {
             return (
-              <div className="col-md-6" key={sectionIndex}>
+              <div className="col col-md-6" key={sectionIndex}>
                 {section.map((field, fieldIndex) => {
                   return (
                     <Field
@@ -94,7 +96,7 @@ class Register extends Component {
             this.state.errors.map((error, errorIndex) => {
               return (
                 <div
-                  className="alert alert-danger"
+                  className="alert alert-danger d-inline-block my-2"
                   role="alert"
                   key={errorIndex}
                 >
@@ -118,6 +120,7 @@ class Register extends Component {
             Crear usuario
           </button>
         </form>
+        <Link className="" to="/login">Iniciar sesión</Link>
       </div>
     );
   }

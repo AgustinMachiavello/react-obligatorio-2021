@@ -16,13 +16,22 @@ export const fetchAPI = (path, data, method) => {
 
 export const getError = (response) => {
     if (response.status === 'ERROR') {
-        return [response.msg]
+        if (typeof response.msg !== 'object') {
+            return [response.msg]
+        }
+        else {
+            let errors = ''
+            for(const m in response.msg){
+                errors += response.msg[m][0] + ' '
+            }
+            return[errors]
+        }
     }
     return
 }
 
 export const getToken = () => {
-    return localStorage.getItem('TOKEN');
+    return JSON.parse(localStorage.getItem('TOKEN'));
 }
 
 export const setToken = (token) => {

@@ -22,6 +22,11 @@ class App extends Component {
             <PageWrapper>
               <Route
                 exact={true}
+                path="/"
+                component={Register}
+              />
+              <Route
+                exact={true}
                 path="/login"
                 component={LogIn}
               />
