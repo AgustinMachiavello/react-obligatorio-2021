@@ -1,7 +1,7 @@
 import {Component, React} from 'react';
 
 // Router
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 // Components
 import PageWrapper from './components/PageWrapper';
@@ -27,8 +27,13 @@ class App extends Component {
               />
               <Route
                 exact={true}
-                path="/registro"
+                path="/signup"
                 component={Register}
+              />
+              <Route
+                exact={true}
+                path="/dashboard"
+                component={Dashboard}
               />
             </PageWrapper>
           </Router>

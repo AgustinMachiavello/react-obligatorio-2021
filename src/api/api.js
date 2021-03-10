@@ -1,5 +1,3 @@
-import { useParams } from 'react-router';
-
 const BASE_URL = 'https://plan-nature.000webhostapp.com/api/obligatorio/'
 
 export const fetchAPI = (path, data, method) => {
@@ -7,10 +5,10 @@ export const fetchAPI = (path, data, method) => {
     let uri = ''
     for(const d in params) {
         if(d !== '0') {
-            uri += `&${params[d][0]}=1`
+            uri += `&${params[d][0]}=${params[d][1]}`
         }
         else {
-            uri += `?${params[d][0]}=1`
+            uri += `?${params[d][0]}=${params[d][1]}`
         }
     }
     return fetch(BASE_URL + path + uri, { method: method }).then(res => res.json());
@@ -18,7 +16,7 @@ export const fetchAPI = (path, data, method) => {
 
 export const getError = (response) => {
     if (response.status === 'ERROR') {
-        return response.msg
+        return [response.msg]
     }
     return
 }
@@ -27,6 +25,6 @@ export const getToken = () => {
     return localStorage.getItem('TOKEN');
 }
 
-export const setToken = (e) => {
-    return localStorage.setItem('TOKEN', JSON.stringify(e.token));
+export const setToken = (token) => {
+    return localStorage.setItem('TOKEN', JSON.stringify(token));
 }
