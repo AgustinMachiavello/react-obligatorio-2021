@@ -3,7 +3,7 @@ import React, { Component } from "react";
 // API
 import { setToken, getToken, fetchAPI, getError } from "../api/api";
 
-const entrenamientosTiposChecked = []
+
 
 class EntrenamientoMinutos extends Component {
   constructor(props) {
@@ -28,6 +28,7 @@ class EntrenamientoMinutos extends Component {
   }
 
   render() {
+    const entrenamientosTiposChecked = []
     return (
       <div className="py-5 col col-md-6">
         <h2>Minutos por entrenameinto</h2>
@@ -43,8 +44,8 @@ class EntrenamientoMinutos extends Component {
               if (entrenamientosTiposChecked.indexOf(entrenamiento.tipo) >= 0) {
                 return;
               }
+              entrenamientosTiposChecked.push(entrenamiento.tipo)
               return (
-                entrenamientosTiposChecked.push(entrenamiento.tipo),
                 <tr key={entrenamientoIndex}>
                   <th scope="row">{entrenamiento.tipo}</th>
                   <td>{this.getMinutosEntrenamiento(entrenamiento.tipo)} min</td>

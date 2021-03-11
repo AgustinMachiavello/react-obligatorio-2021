@@ -7,6 +7,8 @@ import LogoutForm from "../components/LogoutForm";
 import EntrenamientoCount from "../components/EntrenamientoCount";
 import EntrenamientoMinutos from "../components/EntrenamientoMinutos";
 import GraficaIMC from "../components/GraficaIMC";
+import HealthStatus from "../components/HealthStatus";
+import VariacionPeso from "../components/VariacionPeso";
 
 
 // API
@@ -45,14 +47,6 @@ class Dashboard extends Component {
     )
   }
 
-  calculateIMC = (peso, altura) => {
-    return (peso/(altura*altura))
-  }
-
-  generateIMCData = (entrenameintosList) => {
-
-  }
-
   getEntrenamientos = () => {
     const data = {
       token: getToken(),
@@ -72,13 +66,6 @@ class Dashboard extends Component {
         ]
         //# TODO simulacrosi la API devuelve algo
         this.setState({ entrenamientosList: temp })
-        // IMC
-        const data = []
-        this.state.entrenamientosList.map((ent, entIndex) => {
-          data.push([ent.id, this.calculateIMC(ent.peso, 1.5)])
-        })
-        console.log('DATA:', data)
-        this.setState({ imc: data })
       }
     );
   };
@@ -123,7 +110,9 @@ class Dashboard extends Component {
             <EntrenamientoList onError={this.setErrors} entrenamientosList={this.state.entrenamientosList}/>
             <EntrenamientoCount onError={this.setErrors} entrenamientosList={this.state.entrenamientosList}/>
             <EntrenamientoMinutos onError={this.setErrors} entrenamientosList={this.state.entrenamientosList} optionsList={this.state.optionsList}/>
-            <GraficaIMC entrenamientosList={this.state.entrenamientosList} data={this.state.imc}/>
+            <GraficaIMC entrenamientosList={this.state.entrenamientosList}/>
+            <HealthStatus onError={this.setErrors}/>
+            <VariacionPeso onError={this.setErrors}/>
           </div>
         </div>
       </div>
