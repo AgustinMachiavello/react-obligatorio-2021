@@ -3,15 +3,23 @@ import React, { Component } from "react";
 // API
 import { setToken, getToken, fetchAPI, getError } from "../api/api";
 
-class EntrenamientoList extends Component {
+const entrenamientosTiposChecked = []
+
+class EntrenamientoMinutos extends Component {
   constructor(props) {
     super(props);
     this.state = {
       messages: [],
-      entrenamientos: [],
     };
   }
 
+  getMinutosEntrenamiento = (tipo) => {
+    let tiempo = 0;
+    const entrenamientosTipo = this.props.entrenamientosList.filter(ent => ent.tipo === tipo)
+    entrenamientosTipo.map((ent, entIndex) => tiempo += ent.duracion);
+    // entrenamientosTiposChecked.push(tipo);
+    return tiempo;
+  }
 
   handleEntrenamientoDelete = (e) => {
     //# TODO
@@ -22,30 +30,24 @@ class EntrenamientoList extends Component {
   render() {
     return (
       <div className="py-5 col col-md-6">
-        <h2>Listado de entrenamientos</h2>
+        <h2>Minutos por entrenameinto</h2>
         <table className="table">
           <thead>
             <tr>
-              <th scope="col">Nombre</th>
               <th scope="col">Tipo</th>
-              <th scope="col">Duración</th>
-              <th scope="col">Peso</th>
-              <th scope="col">Acciones</th>
+              <th scope="col">Tiempo</th>
             </tr>
           </thead>
           <tbody className="">
             {this.props.entrenamientosList.map((entrenamiento, entrenamientoIndex) => {
+              if (entrenamientosTiposChecked.indexOf(entrenamiento.tipo) >= 0) {
+                return;
+              }
               return (
+                entrenamientosTiposChecked.push(entrenamiento.tipo),
                 <tr key={entrenamientoIndex}>
-                  <th scope="row">{entrenamiento.nombre}</th>
-                  <td>{entrenamiento.tipo}</td>
-                  <td>{entrenamiento.duracion}</td>
-                  <td>{entrenamiento.peso}</td>
-                  <td>
-                    <button className="btn btn-danger btn-sm" onClick={e => this.handleEntrenamientoDelete}>
-                      <i className="bi bi-trash-fill"></i>
-                    </button>
-                  </td>
+                  <th scope="row">{entrenamiento.tipo}</th>
+                  <td>{this.getMinutosEntrenamiento(entrenamiento.tipo)} min</td>
                 </tr>
               )
             })}
@@ -56,4 +58,4 @@ class EntrenamientoList extends Component {
   }
 }
 
-export default EntrenamientoList;
+export default EntrenamientoMinutos;

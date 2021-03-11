@@ -12,7 +12,7 @@ class LogoutForm extends Component {
         };
         fetchAPI('logout', data, 'GET').then(
             response => {
-                console.log(response)
+                console.log('logout', response)
                 const errors = getError(response);
                 this.props.onError(errors);
                 if (!errors) {

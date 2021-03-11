@@ -4,6 +4,8 @@ import React, { Component } from "react";
 import EntrenamientoForm from "../components/EntrenamientoForm";
 import EntrenamientoList from "../components/EntrenamientoList";
 import LogoutForm from "../components/LogoutForm";
+import EntrenamientoCount from "../components/EntrenamientoCount";
+import EntrenamientoMinutos from "../components/EntrenamientoMinutos";
 
 // API
 import { setToken, getToken, fetchAPI, getError } from "../api/api";
@@ -14,16 +16,58 @@ class Dashboard extends Component {
     this.state = {
       errors: [],
       messages: [],
+      entrenamientosList: [],
+      optionsList: [],
     };
   }
 
   setErrors = (errorList) => {
-    console.log(errorList)
+    console.log('errors', errorList)
     this.setState({ errors: errorList });
   };
 
-  getUser = () => {
-    const tempUser = 'a';
+  getEntrenamientoTipos = () => {
+    const data = {
+      token: getToken(),
+    };
+    fetchAPI('listado-entrenamiento-tipo', data, 'GET').then(
+      response => {
+        console.log('listado-entrenamiento-tipo', response)
+        const errors = getError(response);
+        this.setErrors(errors);
+        if (!errors) {
+          this.setState({optionsList: response.tipos })
+        }
+      }
+    )
+  }
+
+  getEntrenamientos = () => {
+    const data = {
+      token: getToken(),
+    };
+    fetchAPI("listado-entrenamiento", data, "GET").then((response) => {
+      console.log('listado-entrenamiento', response);
+        const errors = getError(response);
+        this.setErrors(errors);
+        if (!errors) {
+          this.setState({ entrenamientosList: response.entrenamiento });
+        }
+
+        //# TODO simulacrosi la API devuelve algo
+        this.setState({ entrenamientosList: [
+          {'id': 1, 'nombre': 'pedaleada', 'tipo': 'patas', 'duracion': 420, 'peso': 50},
+          {'id': 2, 'nombre': 'trote', 'tipo': 'correr', 'duracion': 1, 'peso': 99},
+          {'id': 3, 'nombre': 'saltos', 'tipo': 'patas', 'duracion': 22, 'peso': 44},
+        ] })
+      }
+    );
+  };
+
+
+  componentDidMount() {
+    this.getEntrenamientoTipos();
+    this.getEntrenamientos();
   }
 
   render() {
@@ -57,8 +101,10 @@ class Dashboard extends Component {
         </div>
         <div className="row">
           <div className="col col-12">
-            <EntrenamientoForm onError={this.setErrors} />
-            <EntrenamientoList onError={this.setErrors} />
+            <EntrenamientoForm onError={this.setErrors} optionsList={this.state.optionsList}/>
+            <EntrenamientoList onError={this.setErrors} entrenamientosList={this.state.entrenamientosList}/>
+            <EntrenamientoCount onError={this.setErrors} />
+            <EntrenamientoMinutos onError={this.setErrors} entrenamientosList={this.state.entrenamientosList} optionsList={this.state.optionsList}/>
           </div>
         </div>
       </div>

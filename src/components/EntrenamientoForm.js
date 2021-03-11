@@ -36,7 +36,6 @@ class EntrenamientoForm extends Component {
     super(props);
     this.state = {
       messages: [],
-      optionsList: [],
     };
   }
 
@@ -50,7 +49,7 @@ class EntrenamientoForm extends Component {
       duracion: duracion.value,
     };
     fetchAPI("agregar-entrenamiento", data, "POST").then((response) => {
-      console.log(response)
+      console.log('agregar-entrenamiento', response)
       const errors = getError(response);
       this.props.onError(errors);
       if (!errors) {
@@ -59,34 +58,14 @@ class EntrenamientoForm extends Component {
     });
   };
 
-  getEntrenamientoTipos = () => {
-    const data = {
-      token: getToken(),
-    };
-    fetchAPI('listado-entrenamiento-tipo', data, 'GET').then(
-      response => {
-        console.log(response)
-        const errors = getError(response);
-        this.props.onError(errors);
-        if (!errors) {
-          this.setState({optionsList: response.tipos })
-        }
-      }
-    )
-  }
-
-  componentDidMount = () => {
-    this.getEntrenamientoTipos();
-  }
-
   render() {
     return (
-      <div className="py-5">
+      <div className="py-5 col col-md-6">
         <h2>Agregar entrenameinto</h2>
         <form onSubmit={this.handleSubmit}>
           {fields.sections.map((section, sectionIndex) => {
             return (
-              <div className="col col-md-6" key={sectionIndex}>
+              <div className="" key={sectionIndex}>
                 {section.map((field, fieldIndex) => {
                   return (
                     <Field
@@ -98,7 +77,7 @@ class EntrenamientoForm extends Component {
                       onBlur={this.props.handleBlur}
                       touched={this.props.touched[field.name]}
                       errors={this.props.errors[field.name]}
-                      optionsList={this.state.optionsList}/>
+                      optionsList={this.props.optionsList}/>
                   );
                 })}
               </div>

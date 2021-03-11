@@ -29,6 +29,7 @@ const fields = {
         elementName: "input",
         type: "number",
         placeholder: "Tu altura",
+        float: true,
       },
     ],
   ],

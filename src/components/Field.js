@@ -17,6 +17,7 @@ class Field extends Component {
                         name={this.props.name}
                         onChange={this.props.onChange}
                         onBlur={this.props.onBlur}
+                        step={this.props.float && 0.01}
                     />
                     : 
                     <select className="form-control" id={this.props.name} >
