@@ -29,7 +29,7 @@ class EntrenamientoList extends Component {
               <th scope="col">Nombre</th>
               <th scope="col">Tipo</th>
               <th scope="col">Duración</th>
-              <th scope="col">Peso</th>
+              <th scope="col">Peso</th> {/* TODO cambiar por variacion */}
               <th scope="col">Acciones</th>
             </tr>
           </thead>

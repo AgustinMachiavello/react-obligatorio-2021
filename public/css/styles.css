@@ -6,3 +6,8 @@
     margin: 0px;
     padding: 0px;
 }
+
+.chart {
+    height: 500px;
+    width: 500px;
+}

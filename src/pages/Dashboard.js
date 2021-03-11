@@ -6,6 +6,8 @@ import EntrenamientoList from "../components/EntrenamientoList";
 import LogoutForm from "../components/LogoutForm";
 import EntrenamientoCount from "../components/EntrenamientoCount";
 import EntrenamientoMinutos from "../components/EntrenamientoMinutos";
+import GraficaIMC from "../components/GraficaIMC";
+
 
 // API
 import { setToken, getToken, fetchAPI, getError } from "../api/api";
@@ -18,6 +20,7 @@ class Dashboard extends Component {
       messages: [],
       entrenamientosList: [],
       optionsList: [],
+      imc: [],
     };
   }
 
@@ -42,6 +45,14 @@ class Dashboard extends Component {
     )
   }
 
+  calculateIMC = (peso, altura) => {
+    return (peso/(altura*altura))
+  }
+
+  generateIMCData = (entrenameintosList) => {
+
+  }
+
   getEntrenamientos = () => {
     const data = {
       token: getToken(),
@@ -54,16 +65,23 @@ class Dashboard extends Component {
           this.setState({ entrenamientosList: response.entrenamiento });
         }
 
-        //# TODO simulacrosi la API devuelve algo
-        this.setState({ entrenamientosList: [
+        const temp = [
           {'id': 1, 'nombre': 'pedaleada', 'tipo': 'patas', 'duracion': 420, 'peso': 50},
           {'id': 2, 'nombre': 'trote', 'tipo': 'correr', 'duracion': 1, 'peso': 99},
           {'id': 3, 'nombre': 'saltos', 'tipo': 'patas', 'duracion': 22, 'peso': 44},
-        ] })
+        ]
+        //# TODO simulacrosi la API devuelve algo
+        this.setState({ entrenamientosList: temp })
+        // IMC
+        const data = []
+        this.state.entrenamientosList.map((ent, entIndex) => {
+          data.push([ent.id, this.calculateIMC(ent.peso, 1.5)])
+        })
+        console.log('DATA:', data)
+        this.setState({ imc: data })
       }
     );
   };
-
 
   componentDidMount() {
     this.getEntrenamientoTipos();
@@ -103,8 +121,9 @@ class Dashboard extends Component {
           <div className="col col-12">
             <EntrenamientoForm onError={this.setErrors} optionsList={this.state.optionsList}/>
             <EntrenamientoList onError={this.setErrors} entrenamientosList={this.state.entrenamientosList}/>
-            <EntrenamientoCount onError={this.setErrors} />
+            <EntrenamientoCount onError={this.setErrors} entrenamientosList={this.state.entrenamientosList}/>
             <EntrenamientoMinutos onError={this.setErrors} entrenamientosList={this.state.entrenamientosList} optionsList={this.state.optionsList}/>
+            <GraficaIMC entrenamientosList={this.state.entrenamientosList} data={this.state.imc}/>
           </div>
         </div>
       </div>
