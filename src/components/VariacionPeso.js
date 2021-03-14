@@ -23,8 +23,6 @@ class VariacionPeso extends Component {
             if (!errors) {
                 this.setState({ variacion: response.variacion })
             }
-            // # TODO si anduviera la API...
-            this.setState({ variacion: 25 })
         })
     }
     

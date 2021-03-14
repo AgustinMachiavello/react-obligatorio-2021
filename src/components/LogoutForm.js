@@ -5,6 +5,9 @@ import { setToken, getToken, fetchAPI, getError } from "../api/api";
 
 
 class LogoutForm extends Component {
+    constructor(props) {
+        super(props);
+    }
 
     handleClick = () => {
         const data = {
@@ -16,7 +19,7 @@ class LogoutForm extends Component {
                 const errors = getError(response);
                 this.props.onError(errors);
                 if (!errors) {
-                    this.props.history.push("/login");
+                    window.location.href = "/login";
                 }
             }
         )

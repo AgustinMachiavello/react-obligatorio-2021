@@ -53,7 +53,8 @@ class EntrenamientoForm extends Component {
       const errors = getError(response);
       this.props.onError(errors);
       if (!errors) {
-        this.setState({ messages: [response.msg] });
+        this.setState({ messages: ['Agregado: ' + response.entrenamiento.id] });
+        this.props.resfreshList();
       }
     });
   };

@@ -22,9 +22,11 @@ class GraficaIMC extends  Component {
   
   generateData = () => {
     const valores = []
-    this.props.entrenamientosList.map((ent, entIndex) => {
-      valores.push([ent.id, this.calculateIMC(ent.peso, 1.5)])
-    })
+    if (this.props.entrenamientosList) {
+      this.props.entrenamientosList.map((ent, entIndex) => {
+        valores.push([ent.id, this.calculateIMC(ent.peso, 1.5)])
+      })
+    }
     return valores
   }
 
@@ -33,6 +35,8 @@ class GraficaIMC extends  Component {
     return (
       <div className="py-5 col col-md-6">
         <h2>IMC</h2>
+        <h5>X: ID</h5>
+        <h5>Y: IMC</h5>
         <div className="chart">
           <Chart data={[{ label: 'IMC', data: data }]} axes={axes} />
         </div>

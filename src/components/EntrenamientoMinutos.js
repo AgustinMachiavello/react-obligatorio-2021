@@ -15,7 +15,7 @@ class EntrenamientoMinutos extends Component {
 
   getMinutosEntrenamiento = (tipo) => {
     let tiempo = 0;
-    const entrenamientosTipo = this.props.entrenamientosList.filter(ent => ent.tipo === tipo)
+    const entrenamientosTipo = this.props.entrenamientosList.filter(ent => ent.nombre === tipo)
     entrenamientosTipo.map((ent, entIndex) => tiempo += ent.duracion);
     // entrenamientosTiposChecked.push(tipo);
     return tiempo;
@@ -40,15 +40,15 @@ class EntrenamientoMinutos extends Component {
             </tr>
           </thead>
           <tbody className="">
-            {this.props.entrenamientosList.map((entrenamiento, entrenamientoIndex) => {
-              if (entrenamientosTiposChecked.indexOf(entrenamiento.tipo) >= 0) {
+            {this.props.entrenamientosList && this.props.entrenamientosList.map((entrenamiento, entrenamientoIndex) => {
+              if (entrenamientosTiposChecked.indexOf(entrenamiento.nombre) >= 0) {
                 return;
               }
-              entrenamientosTiposChecked.push(entrenamiento.tipo)
+              entrenamientosTiposChecked.push(entrenamiento.nombre)
               return (
                 <tr key={entrenamientoIndex}>
-                  <th scope="row">{entrenamiento.tipo}</th>
-                  <td>{this.getMinutosEntrenamiento(entrenamiento.tipo)} min</td>
+                  <th scope="row">{entrenamiento.nombre}</th>
+                  <td>{this.getMinutosEntrenamiento(entrenamiento.nombre)} min</td>
                 </tr>
               )
             })}

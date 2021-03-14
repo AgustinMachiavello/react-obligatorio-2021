@@ -18,7 +18,7 @@ class EntrenamientoCount extends Component {
     render () {
         return (
             <div className="py-5 col col-md-6">
-                <h2>Cantidad de entrenameintos: <span>{this.props.entrenamientosList.length}</span></h2>
+                <h2>Cantidad de entrenameintos: <span>{this.props.entrenamientosList && this.props.entrenamientosList.length}</span></h2>
             </div>
         )
     }
